@@ -190,9 +190,10 @@ function keyPressed(){
 
 }
 
-function touchStarted(){
-	if(questionMode){
-
+function touchEnded(){
+	if(introMode){
+		introMode = false;
+		questionMode = false;
 	}
 }
 
@@ -1537,21 +1538,27 @@ function instructions(){
 	fill(0);
 	rect(0, 77, windowWidth, 30);
 
+	//Raffle instructions
 	textSize(50);
 	textFont(PLAY_FAIR_DISPLAY_BOLD);
 	fill(255);
-	text("Instructions", (windowWidth/2)-150,170);
+	//text("Instructions", (windowWidth/2)-150,170);
+	textFont(PLAY_FAIR_DISPLAY_BOLD);
+	text("To Play For A Chance At The Raffle", 300,170);
 
 	textSize(40);
-	textFont(PLAY_FAIR_DISPLAY_BOLD);
-	fill(255);
-	// text("Players can choose to play alone or in teams", 240,250);
-	// text("If broken into teams, someone must be designated to the role of ", 40,310);
-	// text("Alex Trebek. Alex must keep score then turn in the winning", 40,370);
-	// text("team's score to enter them for the raffle.", 40,450);
-	text("To play for a chance at the raffle", 400,230);
-	text("Post a picture of you with your score on the OBF thread.", 150,310);
-	text("The winner will be chosen from there. Enjoy!", 250,370);
+	text("Keep track of your score!",450,310);
+	text("Post a picture of you with your score on the OBF thread.", 200,370);
+	text("The winner will be chosen from there.", 350,430);
+
+	textSize(50);
+	text('Enjoy!', 600,550);
+
+	textSize(25);
+	text('Touch The Screen or Any key to Start Playing', 425,650);
+
+
+
 
 
 }
