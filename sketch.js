@@ -2,6 +2,7 @@
 var questionMode = false;
 var showAnswer = false;
 var questionNum;
+var introMode = true;
 
 //Images
 //Musicians of Color Images
@@ -111,7 +112,7 @@ function preload(){
 	PLAY_FAIR_DISPLAY_BOLD = loadFont('Fonts/PlayfairDisplay-Bold.ttf');
 
 	//Jeopardy Song
-	jeopardySong = loadSound('Sounds/jeopardy.mp3');
+	jeopardySong = loadSound('Sounds/Violin Jeopardy.mp3');
 
 	//Images
 	//Musicians of Color
@@ -158,28 +159,41 @@ function setup() {
 	//init Game Variable
 	questionMode = false;
 	showAnswer = false;
+	introMode = true;
 	questionNum = 0;
 }
 
 function keyPressed(){
-	if(key == ' ' && !showAnswer){
+
+	if(key === ' ' && !showAnswer){
 		if(jeopardySong.isPlaying()){
 			jeopardySong.stop();
-		}
-		if(questionMode){
 			showAnswer = true;
 		}
+		// if(questionMode){
+		// 	showAnswer = true;
+		// }
 
 
 	}
-	else if(key == ' ' && showAnswer && questionMode) {
+	else if(key === ' ' && showAnswer && questionMode) {
 		jeopardySong.stop();
 		showAnswer = false;
 		questionNum = 0;
 		questionMode = false;
 
 	}
+	else if(keyCode === ENTER){
+		introMode = false;
+		questionMode = false;
+	}
 
+}
+
+function touchStarted(){
+	if(questionMode){
+
+	}
 }
 
 function mouseClicked(){
@@ -443,12 +457,20 @@ function mouseClicked(){
 
 function draw(){
 	background(235, 81, 15); //red-orange
-	if(!questionMode){
-		drawBoard();
+	if (introMode){
+		instructions();
 	}
-	else{
-		showQuestions()
+	else{//Start game
+		if(!questionMode){
+			drawBoard();
+		}
+		else{
+			showQuestions()
+		}
 	}
+
+
+
 
 }
 
@@ -585,7 +607,7 @@ function col1_100(){
 }
 
 function col1_200(){
-	if((mouseX > 15) && (mouseX < 235) && ( mouseY >= 295) && (mouseY <=399) & !c1_200_clicked){
+	if((mouseX > 15) && (mouseX < 235) && ( mouseY >= 295) && (mouseY <=399) && !c1_200_clicked){
 		stroke(255,204,0);
 		c1_200 = true;
 	}
@@ -1493,5 +1515,44 @@ function showQuestions(){
 		default :
 			//Nothing
 	}
+}
+
+function instructions(){
+	background(235, 81, 15);//red-orange
+
+	//Displaying Title (Top Center)
+	strokeWeight(0);
+	textSize(50);
+	textFont(PLAY_FAIR_DISPLAY_BOLD);
+	fill(0);
+	text("OBF String Jeopardy", (windowWidth/2)-220, 55);
+
+	//Iymanni's Logo (Top-Right)
+	fill(255);
+	ellipse(46,40,105);
+	fill(0);
+	text("iah",10,60);
+
+	//Border below Title
+	fill(0);
+	rect(0, 77, windowWidth, 30);
+
+	textSize(50);
+	textFont(PLAY_FAIR_DISPLAY_BOLD);
+	fill(255);
+	text("Instructions", (windowWidth/2)-150,170);
+
+	textSize(40);
+	textFont(PLAY_FAIR_DISPLAY_BOLD);
+	fill(255);
+	// text("Players can choose to play alone or in teams", 240,250);
+	// text("If broken into teams, someone must be designated to the role of ", 40,310);
+	// text("Alex Trebek. Alex must keep score then turn in the winning", 40,370);
+	// text("team's score to enter them for the raffle.", 40,450);
+	text("To play for a chance at the raffle", 400,230);
+	text("Post a picture of you with your score on the OBF thread.", 150,310);
+	text("The winner will be chosen from there. Enjoy!", 250,370);
+
+
 }
 
