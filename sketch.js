@@ -191,7 +191,9 @@ function keyPressed(){
 		}
 	}
 	else if(keyCode === ENTER && showAnswer && questionMode) {
-		jeopardySong.stop();
+		if(jeopardySong.isPlaying){
+			jeopardySong.stop();
+		}
 		showAnswer = false;
 		questionNum = 0;
 		questionMode = false;
