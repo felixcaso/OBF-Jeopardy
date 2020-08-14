@@ -3,6 +3,15 @@ var questionMode = false;
 var showAnswer = false;
 var questionNum;
 var introMode = true;
+var gameCount;
+
+var showChoice = false;
+var addScore = false;
+var score = 0;
+var playerChoice;
+var playerName;
+var ansInp;
+var nameInp;
 
 //Images
 //Musicians of Color Images
@@ -155,12 +164,22 @@ function preload(){
 
 function setup() {
 	createCanvas(windowWidth,windowHeight);
+	ansInp = createInput('').attribute('placeholder', 'Enter Answer');
+	ansInp.position(700,600);
+	ansInp.size(120,40);
+	ansInp.hide();
+
+	nameInp = createInput('').attribute('placeholder', 'Enter Name');
+	nameInp.position(600,250);
+	nameInp.size(120,40);
+
 
 	//init Game Variable
 	questionMode = false;
 	showAnswer = false;
 	introMode = true;
 	questionNum = 0;
+	gameCount = 0;
 }
 
 function keyPressed(){
@@ -170,39 +189,32 @@ function keyPressed(){
 			jeopardySong.stop();
 			showAnswer = true;
 		}
-		// if(questionMode){
-		// 	showAnswer = true;
-		// }
-
-
 	}
-	else if(key === ' ' && showAnswer && questionMode) {
+	else if(keyCode === ENTER && showAnswer && questionMode) {
 		jeopardySong.stop();
 		showAnswer = false;
 		questionNum = 0;
 		questionMode = false;
-
 	}
 	else if(keyCode === ENTER){
-		introMode = false;
-		questionMode = false;
-	}
-
-}
-
-function touchStarted(){
-	if(questionMode){
+		if(introMode){
+			playerName = nameInp.value();
+			nameInp.hide();
+			introMode = false;
+		}
+		checkAnswer();
 
 	}
+
 }
 
 function mouseClicked(){
-
 	if(c1_100){
 		//transition
 		c1_100_clicked = true;
 		questionNum = 1;
 		questionMode = true;
+		showChoice = true;
 		c1_100 = false;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
@@ -214,6 +226,7 @@ function mouseClicked(){
 		c1_200_clicked = true;
 		questionNum = 2;
 		questionMode = true;
+		showChoice = true;
 		c1_200 = false;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
@@ -225,6 +238,7 @@ function mouseClicked(){
 		questionNum = 3;
 		questionMode = true;
 		c1_300 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -235,6 +249,7 @@ function mouseClicked(){
 		questionNum = 4;
 		questionMode = true;
 		c1_400 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -245,6 +260,7 @@ function mouseClicked(){
 		questionNum = 5;
 		questionMode = true;
 		c1_500 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -256,6 +272,7 @@ function mouseClicked(){
 		questionNum = 6;
 		questionMode = true;
 		c2_100 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -266,6 +283,7 @@ function mouseClicked(){
 		questionNum = 7;
 		questionMode = true;
 		c2_200 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -276,6 +294,7 @@ function mouseClicked(){
 		questionNum = 8;
 		questionMode = true;
 		c2_300 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -286,6 +305,7 @@ function mouseClicked(){
 		questionNum = 9;
 		questionMode = true;
 		c2_400 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -296,6 +316,7 @@ function mouseClicked(){
 		questionNum = 10;
 		questionMode = true;
 		c2_500 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -307,6 +328,7 @@ function mouseClicked(){
 		questionNum = 11;
 		questionMode = true;
 		c3_100 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -317,6 +339,7 @@ function mouseClicked(){
 		questionNum = 12;
 		questionMode = true;
 		c3_200 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -327,6 +350,7 @@ function mouseClicked(){
 		questionNum = 13;
 		questionMode = true;
 		c3_300 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -337,6 +361,7 @@ function mouseClicked(){
 		questionNum = 14;
 		questionMode = true;
 		c3_400 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -347,6 +372,7 @@ function mouseClicked(){
 		questionNum = 15;
 		questionMode = true;
 		c3_500 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -358,6 +384,7 @@ function mouseClicked(){
 		questionNum = 16;
 		questionMode = true;
 		c4_100 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -368,6 +395,7 @@ function mouseClicked(){
 		questionNum = 17;
 		questionMode = true;
 		c4_200 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -378,6 +406,7 @@ function mouseClicked(){
 		questionNum = 18;
 		questionMode = true;
 		c4_300 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -388,6 +417,7 @@ function mouseClicked(){
 		questionNum = 19;
 		questionMode = true;
 		c4_400 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -398,6 +428,7 @@ function mouseClicked(){
 		questionNum = 20;
 		questionMode = true;
 		c4_500 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -409,6 +440,7 @@ function mouseClicked(){
 		questionNum = 21;
 		questionMode = true;
 		c5_100 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -419,6 +451,7 @@ function mouseClicked(){
 		questionNum = 22;
 		questionMode = true;
 		c5_200 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -429,6 +462,7 @@ function mouseClicked(){
 		questionNum = 23;
 		questionMode = true;
 		c5_300 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -439,6 +473,7 @@ function mouseClicked(){
 		questionNum = 24;
 		questionMode = true;
 		c5_400 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -449,6 +484,7 @@ function mouseClicked(){
 		questionNum = 25;
 		questionMode = true;
 		c5_500 = false;
+		showChoice = true;
 		if(!jeopardySong.isPlaying()){
 			jeopardySong.play();
 		}
@@ -492,6 +528,10 @@ function setText(){
 	fill(0);
 	rect(0, 77, windowWidth, 30);
 
+	//Display Name and Score
+	textSize(25);
+	text(playerName+': '+'$'+score, 115, 50);
+
 	if(!questionMode){
 		//Font syles for Catagory
 		textFont(PLAY_FAIR_DISPLAY_BOLD);
@@ -499,11 +539,11 @@ function setText(){
 		textSize(22);
 		fill(0);
 
-		// First Catagory text
+		// First Category text
 		text("MUSICIANS", 70, 140);
 		text("OF COLOR", 70, 165);
 
-		// Second Catagory text
+		// Second Category text
 		text("COMPOSERS", 350, 140);
 		text("OF COLOR", 360, 165);
 
@@ -518,6 +558,7 @@ function setText(){
 		// Fifth box text
 		text("STRING", 1200, 140);
 		text("INSTRUMENTS", 1170, 165);
+
 	}
 	else{
 		//textFont('Ariel');
@@ -525,9 +566,7 @@ function setText(){
 		textSize(25);
 		fill(255);
 
-		text("Space Bar To Reveal Answer", 115, 50);
-		text("Space Bar Again To Go Back", 990, 50);
-		//text("Press Enter For Sound", 175, 50);
+		text("Space Bar To Go Back", 990, 50);
 	}
 
 }
@@ -578,6 +617,7 @@ function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 }
 
+
 //=======================================================================================================First Colum
 function col1_100(){
 	if((mouseX > 15) && (mouseX < 235) && ( mouseY >= 175) && (mouseY <=279 && !c1_100_clicked)){
@@ -593,6 +633,7 @@ function col1_100(){
 		strokeWeight(3);
 		fill(255,255,255,5);
 		rect(15, 175, 220, 104,10); // 1st box
+		addScore = true
 
 	}else{
 		strokeWeight(3);
@@ -1261,6 +1302,7 @@ function col5_500(){
 		strokeWeight(3);
 		fill(255,255,255,5);
 		rect(1130, 655, 220, 104,10); // 5th box
+		addScore = true;
 	}else{
 		strokeWeight(3);
 		fill(255);
@@ -1284,17 +1326,37 @@ function showQuestions(){
 		case 1://Joesph Henry Douglas: African American concert violinist, educator and grandson of abolitionist Frederick Douglass.
 			text('African American concert violinist, educator ', 150, 200);
 			text('and grandson of abolitionist Frederick Douglass', 150, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Joesph Henry Douglas',150,505);
+				text('b) Who is Henry Douglas Joesph',150,565);
+			}
+
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
 				showAnswer = true;
+				showChoice = false;
 				text('Who is Joesph Henry Douglas', 150, 505);
 				image(JosephDouglassImg,900,300,340,450);
-
 			}
 			break;
 		case 2://Angel Creasy: Who is the versatile jazz violinist known for creating the song and dance trio, Three Little Words?
 			text('Who is the versatile jazz violinist known for creating', 90, 200);
 			text(' the song and dance trio, Three Little Words?', 90, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Angelina Greasy',150,505);
+				text('b) Who is Angel Creasy',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Angel Creasy', 290, 505);
 				image(AngelCreasyImg,800,320,290,400);
@@ -1303,7 +1365,17 @@ function showQuestions(){
 		case 3://Edward South: African American concert violinist from Louisiana Missouri who turned to a career in jazz?
 			text('African American concert violinist from Louisiana', 125, 200);
 			text('Missouri who turned to a career in jazz', 125, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Edward "Eddy" Otha North',150,505);
+				text('b) Who is Edward "Eddie" Otha South',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Edward “Eddie” Otha South', 50, 505);
 				image(EddieSouthImg,900,280,404,444);
@@ -1313,7 +1385,17 @@ function showQuestions(){
 			text('African American concert violinist, pianist and', 100, 160);
 			text('organist serving 42 years as professor and chair', 100, 220);
 			text('of the music department at Morehouse College', 100, 280);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is William Kemper Heralds',150,505);
+				text('b) Who is Kemper Will Heralds',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is William Kemper Heralds', 100, 505);
 				image(WilliamHarreldImg,900,300,340,450);
@@ -1323,7 +1405,16 @@ function showQuestions(){
 			text('African American violinist, orchestra leader best', 100, 200);
 			text('known for her recordings with the Vivien Garry', 100, 260);
 			text('Quintet', 100, 320);
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Emma Smock',150,505);
+				text('b) Who is Emmy Smalls',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Emma Smock', 75, 505);
 				image(EmmaSmockImg,600,310,663,450);
@@ -1333,7 +1424,17 @@ function showQuestions(){
 		case 6: //Margaret Bonds : Who is best remembered for collaborating with Langston Hughes
 			text('Who is best remembered for collaborating', 200, 200);
 			text('with Langston Hughes?', 200, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Margaret Bonds',150,505);
+				text('b) Who is Martha Binds',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Margaret Bonds', 150, 505);
 				image(MargaretBondsImg,750,240,400,500)
@@ -1342,7 +1443,17 @@ function showQuestions(){
 		case 7://Julius Eastman : Which composer is known for combining minimalism and elements of pop music.. guerilla mini
 			text('Which composer is known for combining ', 200, 200);
 			text('minimalism and elements of pop music.', 200, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('A) Who is Julius Eastman',150,505);
+				text('b) Who is Julian Westman',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Julius Eastman', 200, 505);
 				image(JuliusEastmanImg,760,300,450,450);
@@ -1351,7 +1462,17 @@ function showQuestions(){
 		case 8://Julia Perry:  Who was the black woman comPoser awarded the Guggenheim fellowship twice?
 			text('Who was the black woman composer awarded ', 200, 200);
 			text('the Guggenheim fellowship twice?', 200, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Jewel Berry',150,505);
+				text('b) Who is Julia Perry',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Julia Perry', 250, 500);
 				image(JuliaPerryImg,760,300,450,450);
@@ -1360,7 +1481,17 @@ function showQuestions(){
 		case 9://Coleridge-Taylor Perkinson : Who was the AFRAM composer named after the afro-british composer Samuel CT
 			text('Who was the AFRAM composer named after the', 150, 200);
 			text('afro-british composer Samuel CT?', 150, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Coleridge-Taylor Perkinson',150,505);
+				text('b) Who is Coleridge-Tyson Parker',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Coleridge-Taylor Perkinson', 50, 450);
 				image(ColeridgeTaylorPerkinsonImg,900,300,450,450);
@@ -1369,9 +1500,22 @@ function showQuestions(){
 		case 10://Florence price, who is 1st african american woman who had their music performed in a symphony orchestra?
 			text('Who is the 1st african american woman who had', 100, 200);
 			text('their music performed in a symphony orchestra?', 100, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who is Flora Prince',150,505);
+				text('b) Who is Florence Price',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
-				text('Who is Florence price', 150, 500);
+				text('Who is Florence Price', 150, 500);
+				textSize(20);
+				text('Check out the game OBF Fiddler Hero', 200, 600);
+				text('Her song Adoration is featured there', 200, 630);
 				image(FlorencePriceImg,700,300,450,450);
 			}
 			break;
@@ -1379,7 +1523,17 @@ function showQuestions(){
 		case 11://Orquesta Aragon : Who are the best charanga orchestra in Cuba during the 1950’s and 60’s?
 			text('Who are the best charanga orchestra in Cuba', 100, 180);
 			text(' during the 1950’s and 60’s?', 100, 240);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who are the Orquestion Argan',150,505);
+				text('b) Who are the Orquesta Aragon',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				textSize(50);
 				text('Who are the Orquesta Aragon', 100, 505);
@@ -1390,7 +1544,17 @@ function showQuestions(){
 			text('Who was the First African American orchestra in the', 100, 200);
 			text('U.S. (led by James Reese Europe)that served as', 100, 260);
 			text('a union/booking agency for Black musicians?', 100, 320);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who are the Clefclub Symphony',150,505);
+				text('b) Who are the Clefclub Orchestra',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who is Clefclub Orchestra', 400, 400);
 				image(ClefClubOrchestraImg,350,410,703,350);
@@ -1401,27 +1565,57 @@ function showQuestions(){
 			text('as a violinist with this string quartet, originally featuring ', 40, 240);
 			text(' Gayle Dixon and John Blake Jr. (violin), Maxine Roach', 40, 300);
 			text('(viola) and Akua Dixon, cello and leader.', 40, 360);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who are the Quartet Indigo',150,505);
+				text('b) Who are the Quartet purple',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who are the', 175, 500);
-				text('Quartette Indigo', 175, 560);
+				text('Quartet Indigo', 175, 560);
 				image(QuartetteIndigoImg,600,380,512,366);
 			}
 			break;
-		case 14://Negro String Quartett: Which early 20th century string quartet performed mainly in churches, community organizations and college venues in New York City?
+		case 14://Negro String Quartet: Which early 20th century string quartet performed mainly in churches, community organizations and college venues in New York City?
 			text('Which early 20th century string quartet performed ', 100, 200);
 			text('mainly in churches, community organizations and ', 100, 260);
 			text('college venues in New York City?', 100, 320);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who are the Negro Jazz Group',150,505);
+				text('b) Who are the Negro String Quartet',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
-				text('Who are the Negro String Quartett', 300, 430);
+				text('Who are the Negro String Quartet', 300, 430);
 				image(NegroStringQuartetImg,450,475,505,270);
 			}
 			break;
 		case 15://King & Cater Jazzing Orchestra : Who were the first jazz band from Houston, Texas to swing their music in a style never heard before
 			text('Who were the first jazz band from Houston, Texas ', 140, 200);
 			text('to swing their music in a style never heard before?', 140, 260);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) Who are the King & Cater Jazzing Orchestra',150,505);
+				text('b) Who are the King & Carter Jam',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('Who are', 250, 460);
 				text('the King & Cater', 250, 520);
@@ -1432,7 +1626,17 @@ function showQuestions(){
 		//=================================================================================================== C4
 		case 16:
 			text('What has 5 lines and 4 spaces?', 300, 300);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What is a Staff',150,505);
+				text('b) What is a Barline',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('What is a staff', 250, 525);
 				image(staffImg,650,400,350,250);
@@ -1440,7 +1644,17 @@ function showQuestions(){
 			break;
 		case 17:
 			text('What symbolizes the end of the piece?', 250, 300);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What is a double bar line',150,505);
+				text('b) What is a staff',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('What is a double bar line', 400, 400);
 				image(doubleBarLineImage,400,450);
@@ -1448,14 +1662,35 @@ function showQuestions(){
 			break;
 		case 18:
 			text('What is the musical alphabet?', 350, 250);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What are the letters C,D & E',150,505);
+				text('b) What are the letters A-G',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
+				showAnswer = true;
 				text('What are the letters A-G', 400, 350);
 				image(musicalAlphaImg,435,400,532,244);
 			}
 			break;
 		case 19:
 			text('How many beats does a halfnote equal?', 250, 250);
+
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What are 2 beats',150,505);
+				text('b) What is 1 beat',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('What are 2 beats', 500, 350);
 				image(halfNoteImg,600,400,225,225);
@@ -1465,40 +1700,85 @@ function showQuestions(){
 			text('Identify these images', 450, 200);
 			image(baseClefImg,750,250,200,200);
 			image(trebleClefImg,400,250,200,200);
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What are treble & base clef',150,505);
+				text('b) What are trouble and bass clef',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
-				text('treble (gclef)      base (fcleff)', 350, 500);
+				text('treble (gclef)      base (fclef)', 350, 500);
 
 			}
 			break;
 			//============================================================================================C5
 		case 21:
 			text('What are the instruments in a string family ochestra?', 100, 200);
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What are the Violin,Harp,Guitar,Kora',150,505);
+				text('b) What are the Violin,Viola,Cello,Bass',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
-				text('What are violin 1st & 2nd, viola, chelo, bass', 200, 300);
+				text('What are the Violin, Viola, Cello, Bass', 200, 300);
 				image(stringFamilyImg,450,300,450,450);
 			}
 			break;
 		case 22:
 			text('Which string instrument has an end pin?', 200, 200);
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What is a Cello',150,505);
+				text('b) What is a Bass',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
-				text('What is a Chelo', 500, 300);
+				text('What is a Cello', 500, 300);
 				image(CelloImg,500,350,400,400);
 			}
 			break;
 		case 23:
 			text('What instrument is best known in Africa?', 200, 200);
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What is a Korra',150,505);
+				text('b) What is a Kora',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
-				text('Korra', 575, 300);
+				text('Kora', 575, 300);
 				image(KoraImg,500,350,400,400);
 			}
 			break;
 		case 24:
 			text('Identify parts of the violin', 400, 200);
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What are the Neck-rest, Back & Frets ',150,505);
+				text('b) What are the Chin-rest, Body, Bridge',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('What are ', 500, 300);
 				image(violinPartsImg,400,350)
@@ -1506,7 +1786,16 @@ function showQuestions(){
 			break;
 		case 25:
 			text('Which instrument uses the alto-clef?', 300, 200);
+			//Multiple Choice part
+			if(showChoice){
+				ansInp.show();
+				text('a) What is a Viola',150,505);
+				text('b) What is a Violin',150,565);
+			}
+
 			if (!jeopardySong.isPlaying()) {
+				ansInp.hide();
+				showChoice = false;
 				showAnswer = true;
 				text('What is a Viola', 525, 280);
 				image(violaImg,500,300,400,475);
@@ -1517,42 +1806,390 @@ function showQuestions(){
 	}
 }
 
-function instructions(){
+function instructions() {
 	background(235, 81, 15);//red-orange
-
 	//Displaying Title (Top Center)
 	strokeWeight(0);
 	textSize(50);
 	textFont(PLAY_FAIR_DISPLAY_BOLD);
 	fill(0);
-	text("OBF String Jeopardy", (windowWidth/2)-220, 55);
+	text("OBF String Jeopardy", (windowWidth / 2) - 220, 55);
 
 	//Iymanni's Logo (Top-Right)
 	fill(255);
-	ellipse(46,40,105);
+	ellipse(46, 40, 105);
 	fill(0);
-	text("iah",10,60);
+	text("iah", 10, 60);
 
 	//Border below Title
 	fill(0);
 	rect(0, 77, windowWidth, 30);
 
+
+	//Raffle instructions
 	textSize(50);
 	textFont(PLAY_FAIR_DISPLAY_BOLD);
 	fill(255);
-	text("Instructions", (windowWidth/2)-150,170);
+	//text("Instructions", (windowWidth/2)-150,170);
+	textFont(PLAY_FAIR_DISPLAY_BOLD);
+	text("To Play For A Chance At The Raffle", 300, 170);
 
 	textSize(40);
-	textFont(PLAY_FAIR_DISPLAY_BOLD);
-	fill(255);
-	// text("Players can choose to play alone or in teams", 240,250);
-	// text("If broken into teams, someone must be designated to the role of ", 40,310);
-	// text("Alex Trebek. Alex must keep score then turn in the winning", 40,370);
-	// text("team's score to enter them for the raffle.", 40,450);
-	text("To play for a chance at the raffle", 400,230);
-	text("Post a picture of you with your score on the OBF thread.", 150,310);
-	text("The winner will be chosen from there. Enjoy!", 250,370);
+	//text("Keep track of your score!",450,310);
+	text("Post a picture of you with your end score on the OBF thread.", 150, 370);
+	text("The winner will be chosen from there.", 350, 430);
 
+	textSize(50);
+	text('Enjoy!', 600, 550);
+
+	textSize(30);
+	text('Enter Name to Start Playing', 500, 650);
 
 }
+
+function checkAnswer(){
+	playerChoice = ansInp.value();
+
+	switch(questionNum){
+		case 1:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=100;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=100;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 2:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=200;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=200;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 3:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=300;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=300;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 4:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=400;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=400;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 5:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=500;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=500;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+			//================================================================================================
+		case 6:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=100;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=100;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 7:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=200;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=200;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 8:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=300;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=300;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 9:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=400;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=400;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 10:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=500;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=500;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		//================================================================================================
+		case 11:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=100;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=100;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 12:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=200;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=200;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 13:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=300;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=300;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 14:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=400;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=400;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 15:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=500;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=500;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		//================================================================================================
+		case 16:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=100;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=100;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 17:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=200;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=200;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 18:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=300;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=300;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 19:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=400;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=400;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 20:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=500;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=500;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		//================================================================================================
+		case 21:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=100;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=100;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 22:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=200;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=200;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 23:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=300;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=300;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 24:
+			jeopardySong.stop();
+			if(playerChoice === 'b'){
+				score+=400;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=400;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		case 25:
+			jeopardySong.stop();
+			if(playerChoice === 'a'){
+				score+=500;
+				alert('Correct');
+				gameCount++;
+			}
+			else{
+				score-=500;
+				alert('Wrong');
+				gameCount++;
+			}
+			break;
+		default:
+			//nothing
+
+	}
+
+}
+
+
+
+
+
+
 

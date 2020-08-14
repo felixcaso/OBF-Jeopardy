@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca61ce84-ac65-4a90-bd02-72042ff649c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sounds/Violin Jeopardy.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/sketch.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +37,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/sketch.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1fyDSXv77jwd9pdO5XzIYB5B8cs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -88,5 +88,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="343" y="220" key="run.anything.popup" timestamp="1597400441114">
+      <screen x="0" y="40" width="1368" height="872" />
+    </state>
+    <state x="343" y="220" key="run.anything.popup/0.40.1368.872@0.40.1368.872" timestamp="1597400441114" />
   </component>
 </project>
