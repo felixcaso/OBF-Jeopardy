@@ -566,7 +566,7 @@ function setText(){
 		textSize(25);
 		fill(255);
 
-		text("Space Bar To Go Back", 990, 50);
+		text("Press Enter To Go Back", 990, 50);
 	}
 
 }
