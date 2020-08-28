@@ -2,6 +2,7 @@
 var questionMode = false;
 var showAnswer = false;
 var questionNum;
+var score;
 
 //Images
 //Musicians of Color Images
@@ -111,7 +112,7 @@ function preload(){
 	PLAY_FAIR_DISPLAY_BOLD = loadFont('Fonts/PlayfairDisplay-Bold.ttf');
 
 	//Jeopardy Song
-	jeopardySong = loadSound('Sounds/jeopardy.mp3');
+	jeopardySong = loadSound('Sounds/Violin Jeopardy.mp3');
 
 	//Images
 	//Musicians of Color
@@ -162,7 +163,7 @@ function setup() {
 }
 
 function keyPressed(){
-	if(key == ' ' && !showAnswer){
+	if(key === ' ' && !showAnswer){
 		if(jeopardySong.isPlaying()){
 			jeopardySong.stop();
 		}
@@ -172,7 +173,7 @@ function keyPressed(){
 
 
 	}
-	else if(key == ' ' && showAnswer && questionMode) {
+	else if(key === ' ' && showAnswer && questionMode) {
 		jeopardySong.stop();
 		showAnswer = false;
 		questionNum = 0;
@@ -585,7 +586,7 @@ function col1_100(){
 }
 
 function col1_200(){
-	if((mouseX > 15) && (mouseX < 235) && ( mouseY >= 295) && (mouseY <=399) & !c1_200_clicked){
+	if((mouseX > 15) && (mouseX < 235) && ( mouseY >= 295) && (mouseY <=399) && !c1_200_clicked){
 		stroke(255,204,0);
 		c1_200 = true;
 	}
